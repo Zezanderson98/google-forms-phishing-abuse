@@ -1,3 +1,6 @@
+
+/detections/rules.yara
+
 rule Detect_Google_Forms_Phishing_Abuse {
     meta:
         description = "Detects malicious Google Form response receipts pointing to high-risk cloud hosting subdomains"
