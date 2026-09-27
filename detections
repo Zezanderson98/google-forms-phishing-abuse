@@ -1,5 +1,5 @@
 
-/detections/rules.yara
+**/detections/rules.yara**
 
 rule Detect_Google_Forms_Phishing_Abuse {
     meta:
