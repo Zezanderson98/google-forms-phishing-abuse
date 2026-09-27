@@ -64,7 +64,7 @@ Because the email is physically dispatched by Google's infrastructure, it passes
 * **DKIM:** `PASS` (signed by `google.com`)
 
 
-### 1. Attack Architecture Diagram
+### Attack Architecture Diagram
 
 ```mermaid
 graph TD
