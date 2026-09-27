@@ -3,6 +3,7 @@
 ## 1. Overview & Objective
 * **Playbook ID:** IR-PB-042
 * **Target Vector:** Input Form Platform Abuse (Google Forms Automated Receipts)
+* * **Framework Alignment:** NIST SP 800-61 r2 (Incident Response Lifecycle)
 * **Objective:** Standardize triage, isolation, scoping, and eradication steps when a user receives or interacts with a phishing link arriving via high-reputation, legitimate automated cloud infrastructure.
 
 ---
