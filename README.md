@@ -65,7 +65,8 @@ A critical highlight of this campaign is its low defensive footprint, allowing i
 * **Final Payload Redirect:** `https://maxbetwin[.]me/?promo=GIFT888`
 * **Shared Infrastructure IP:** `104.21.71.88`
 
----
+
+
 
 ## Detection & Hunting Engineering
-Detection scripts, including custom **YARA rules** for raw email parser routing and **Splunk/KQL queries** for corporate proxy logging, can be found in the `/detections` directory of this repository.
+Detection scripts, including custom **YARA rules** for raw email parser routing and **Splunk queries** for corporate proxy logging, can be found in the `/detections` directory of this repository.
