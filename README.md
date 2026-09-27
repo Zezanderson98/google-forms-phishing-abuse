@@ -95,3 +95,10 @@ VirusTotal analysis showing a **1/92 malicious detection ratio**, capturing the 
 
 <img width="1362" height="745" alt="bitcointt" src="https://github.com/user-attachments/assets/8d159513-f0dd-4da9-8f10-52eb3c77986a" />
 
+### 3. IP Reputation & Reverse Proxy Obfuscation (AbuseIPDB)
+AbuseIPDB resource lookup detailing the **0% Abuse Confidence Score**, confirming network-layer evasion via Cloudflare's shared CDN infrastructure.
+
+**(screenshot/03_abuseipdb_reputation_check.png)**
+
+<img width="1359" height="767" alt="abuselpdp life" src="https://github.com/user-attachments/assets/e613f347-134a-4917-9429-a1469deeb4e2" />
+
