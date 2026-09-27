@@ -63,6 +63,27 @@ Because the email is physically dispatched by Google's infrastructure, it passes
 * **SPF:** `PASS` (signed by `google.com`)
 * **DKIM:** `PASS` (signed by `google.com`)
 
+
+[ Threat Actor ]
+       │  (1) Inputs target email & malicious URL
+       ▼
+[ Google Forms Engine ] 
+       │  (2) Generates response receipt mail (DKIM / SPF PASS)
+       ▼
+[ Secure Email Gateway (SEG) ] ──▶ [ YARA Rule Intercepts Pattern ]
+       │  (3) Evades traditional signature checks
+       ▼
+[ User Inbox / Spam Folder ]
+       │  (4) User interacts with embedded link
+       ▼
+[ uvgei2qcvavk[.]pages[.]dev ] ──▶ [ SOC Proxy Hunt / VT 1/92 Flagged ]
+       │  (5) Resolves via Cloudflare Staging Subdomain
+       ▼
+[ maxbetwin[.]me/?promo=GIFT888 ] ──▶ [ Final Landing / Host Isolation ]
+       (6) Shared CDN Reverse Proxy Masking (IP: 104.21.71.88 | AbuseIPDB 0%)
+
+
+
 ### 2. Network Evasion & Redirection Chain
 Once the user interacts with the link inside the form payload, the following redirection architecture is observed:
 
