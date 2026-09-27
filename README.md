@@ -63,24 +63,28 @@ Because the email is physically dispatched by Google's infrastructure, it passes
 * **SPF:** `PASS` (signed by `google.com`)
 * **DKIM:** `PASS` (signed by `google.com`)
 
+```mermaid
+graph TD
+    %% Define Styles
+    classDef attacker fill:#ffcccc,stroke:#333,stroke-width:2px;
+    classDef legit fill:#ccffcc,stroke:#333,stroke-width:2px;
+    classDef defense fill:#cce6ff,stroke:#333,stroke-width:2px;
+    classDef malicious fill:#ffb3b3,stroke:#333,stroke-width:2px;
 
-[ Threat Actor ]
-       │  (1) Inputs target email & malicious URL
-       ▼
-[ Google Forms Engine ] 
-       │  (2) Generates response receipt mail (DKIM / SPF PASS)
-       ▼
-[ Secure Email Gateway (SEG) ] ──▶ [ YARA Rule Intercepts Pattern ]
-       │  (3) Evades traditional signature checks
-       ▼
-[ User Inbox / Spam Folder ]
-       │  (4) User interacts with embedded link
-       ▼
-[ uvgei2qcvavk[.]pages[.]dev ] ──▶ [ SOC Proxy Hunt / VT 1/92 Flagged ]
-       │  (5) Resolves via Cloudflare Staging Subdomain
-       ▼
-[ maxbetwin[.]me/?promo=GIFT888 ] ──▶ [ Final Landing / Host Isolation ]
-       (6) Shared CDN Reverse Proxy Masking (IP: 104.21.71.88 | AbuseIPDB 0%)
+    %% Diagram Nodes
+    A[Threat Actor]:::attacker -->|1. Inputs target email & malicious URL| B(Google Forms Engine):::legit
+    B -->|2. Dispatches response receipt mail<br>DKIM / SPF PASS| C[Secure Email Gateway SEG]
+    C -->|3. Evades classic signatures| D[User Inbox / Spam Folder]:::legit
+    
+    %% Defensive Intercepts
+    C -.->|YARA Rule Intercept| YR[Detection Triggered]:::defense
+    
+    D -->|4. User interacts with embedded link| E[uvgei2qcvavk.pages.dev<br>Cloudflare Staging Subdomain]:::malicious
+    E -.->|SOC Proxy Hunt / VT 1/92 Flagged| PH[Network Alert Generated]:::defense
+    
+    E -->|5. Dynamic JavaScript/HTTP Redirect| F[maxbetwin.me/?promo=GIFT888<br>Final Landing Page]:::malicious
+    F -.->|6. Masked by Shared CDN IP: 104.21.71.88<br>AbuseIPDB 0% score| HI[Host Isolation / Incident Playbook]:::defense
+```
 
 
 
