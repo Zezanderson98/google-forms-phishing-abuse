@@ -75,8 +75,14 @@ Detection scripts, including custom **YARA rules** for raw email parser routing 
 
 ### 1. Phishing Delivery & Mail Headers
 Evidence of the initial delivery mechanism showing the automated Google Forms sender identity 
-(assets/01_gmail_delivery_evidence.png)
+
+**(screenshot/01_gmail_delivery_evidence.png)**
 
 <img width="1365" height="754" alt="mailcoinn" src="https://github.com/user-attachments/assets/07023917-f80e-4aea-8038-bd06e7f4c94b" />
 
 
+## The embedded malicious staging redirect
+
+**(screenshot/02_staging_redirect_evidence.png)**
+
+<img width="1366" height="764" alt="rightontimee" src="https://github.com/user-attachments/assets/a481840d-e2b1-4c3b-b124-10c32eaa3961" />
