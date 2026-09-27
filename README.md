@@ -14,6 +14,17 @@ The triage and behavioral analysis relied on the correlation of the following lo
 * **Network Proxy & DNS Logs:** Analysis of outward-bound web traffic connections, HTTP 302 redirection paths, and fully qualified domain names (FQDNs).
 * **Static & Dynamic Threat Intelligence Feeds:** Querying multi-vendor signature engines via **VirusTotal** and cross-referencing global network abuse records via **AbuseIPDB**.
 
+
+
+## 💻 Environment Used
+The verification, telemetry parsing, and initial triage of this campaign were conducted entirely within a standard operational environment using the following stack:
+
+* **Host Operating System:** Windows 10 Pro
+* **Mail Client & Analyzer:** Native Gmail Web Interface (Spam Folder Triage)
+* **Threat Intelligence & Reputation Pivots:** 
+  * **VirusTotal** (For multi-vendor file/URL scanning and redirection chain mapping)
+  * **AbuseIPDB** (For infrastructure-level reverse proxy identification and network reputation lookups)
+
 ---
 
 ## 🛠️ Steps
