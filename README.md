@@ -118,6 +118,9 @@ A critical highlight of this campaign is its low defensive footprint, allowing i
 ## Detection & Hunting Engineering
 Detection scripts, including custom **YARA rules** for raw email parser routing and **Splunk queries** for corporate proxy logging, can be found in the https://github.com/Zezanderson98/google-forms-phishing-abuse/blob/739867f356c2fe1eaa8bbc00f7088d4a6a671abd/detections directory of this repository.
 
+**View Incident Response Playbook**
+https://github.com/Zezanderson98/google-forms-phishing-abuse/blob/2543c52b6a27f9f8045964cddadf6644f52c33c4/playbooks/google-forms-abuse-playbook.md
+
 ## Screenshots & Visual Evidence
 
 https://github.com/Zezanderson98/google-forms-phishing-abuse/blob/e6c12c7c1a14c1381780b733635faf87f2b02e99/screenshots.md
