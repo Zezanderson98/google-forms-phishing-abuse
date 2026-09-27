@@ -1,6 +1,42 @@
 # google-forms-phishing-abuse
 Technical analysis, IOCs, and MITRE ATT&amp;CK mapping for a phishing campaign abusing legitimate Google Forms infrastructure and Cloudflare Pages to evade secure email gateways.
+
 # Threat Intelligence Report: Google Forms Abuse Exploiting Trusted Infrastructure
+
+## 🎯 Objective
+The primary objective of this investigation was to **detect, analyze, and document an ongoing phishing evasion technique** that exploits legitimate cloud automation platform rules to deliver malicious hyperlinks. Specifically, the intent was to identify how security boundary gateways handle system-generated automated emails from `google.com`, trace the downstream redirection architecture, and build functional defense engineering metrics to proactively hunt for similar campaigns.
+
+---
+
+## 📊 Data Sources
+The triage and behavioral analysis relied on the correlation of the following logs and telemetry sources:
+* **Email Gateway Telemetry & Metadata:** Inspection of raw SMTP internet headers, envelope sender configurations, and SPF/DKIM verification results.
+* **Network Proxy & DNS Logs:** Analysis of outward-bound web traffic connections, HTTP 302 redirection paths, and fully qualified domain names (FQDNs).
+* **Static & Dynamic Threat Intelligence Feeds:** Querying multi-vendor signature engines via **VirusTotal** and cross-referencing global network abuse records via **AbuseIPDB**.
+
+---
+
+## 🛠️ Steps
+The investigation was completed sequentially using the following methodology:
+
+```text
+[Step 1: Header Triage] ──► [Step 2: Payload Extraction] ──► [Step 3: Reputation Pivot] ──► [Step 4: Rule Generation]
+```
+
+1. **Header Triage & Authentication Audit:** Extracted and parsed the raw email headers from the target payload to evaluate authentication mechanisms (`Authentication-Results`).
+2. **Payload Extraction & Sandboxing:** Isolated the initial URL safely and tracked the automated downstream application-layer redirects to determine the final landing site.
+3. **Reputation Pivoting:** Evaluated the staging URL against centralized indicator databases (VirusTotal) and queried the underlying host network infrastructure IP address against crowd-sourced abuse indexes (AbuseIPDB).
+4. **Detection Engineering Modeling:** Codified the distinct attack behaviors into logical, deployable rules for enterprise-wide threat hunting.
+
+---
+
+## 🔍 Findings
+The investigation revealed a highly successful **Defense Evasion** and **Initial Access** campaign:
+
+* **Infrastructure Exploitation:** The attacker successfully manipulated the legitimate automated "Forms response receipts" mechanism of Google Forms. Because the email physically generated from `forms-receipts-noreply@google.com`, it yielded pristine **SPF and DKIM PASS** certifications, successfully avoiding signature-based gateway blocks.
+* **Low-Detection Footprint:** The embedded staging URL (`uvgei2qcvavk[.]pages[.]dev`) yielded a **1/92 malicious detection ratio** on VirusTotal. This indicates that fresh deployments easily evade standard blocklists.
+* **Network-Layer Camouflage:** The destination resolves to IP `104.21.71.88`, a shared Cloudflare Reverse Proxy with a **0% Abuse Confidence Score** on AbuseIPDB. Blocking this indicator at the firewall layer is impossible without triggering extensive false-positive business disruptions.
+* **Final Intent:** The delivery infrastructure leads through a seamless javascript/HTTP redirect chain culminating in an unvetted gambling/monetization landing page (`maxbetwin[.]me`).
 
 ## Executive Summary
 This repository documents a sophisticated phishing campaign that abuses legitimate Google Forms automated response infrastructure to bypass corporate email gateways. By exploiting automated form receipts (`forms-receipts-noreply@google.com`), threat actors successfully land malicious links directly in user mailboxes. The campaign leverages trusted cloud-hosting domains (`pages.dev`) and utilizes shared CDN infrastructure to evade traditional signature and network-layer reputation controls.
