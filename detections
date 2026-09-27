@@ -25,3 +25,18 @@ rule Detect_Google_Forms_Phishing_Abuse {
         all of ($header_*) and (any of ($body_text_*)) and $mal_url_domain
 }
 
+
+
+
+**/detections/splunk_query.spl**
+
+
+index=mail_logs sourcetype=email_security
+| search (src_user="forms-receipts-noreply@google.com" AND mailer_domain="://google.com")
+| search (subject="*Thanks for filling in this form*" OR body="*.pages.dev*")
+| table _time, sender, recipient, subject, attachment_name, urls_extracted, action
+| rename urls_extracted as "Extracted URLs"
+
+
+
+
